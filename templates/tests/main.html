@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block scripts%}
+<script src="{%static 'js/simulador.js'%}" defer>
+</script>
+{%endblock%}
+
+{% block title %}
+Listado de Evaluaciones 
+{% endblock %}
+
+{% block titulo %}
+ Evaluaciones Dispobibles
+{% endblock %}
+
+{%block content%}
+<table>
+    <tr>
+    <th> ID</th><th>Nombre</th><th>Tiempo</th>
+    </tr>
+{% for obj in object_list  %}
+    <tr>
+       <td> {{obj.pk}} </td><td>{{obj.nombre}}</td>
+       <td>{{obj.tiempo}}</td> <td>
+        <a class="waves-effect waves-light btn btn-test"
+        data-pk='{{obj.pk}}' data-name='{{obj.nombre}}' 
+        data-level='{{obj.nivel}}' data-time='{{obj.tiempo}}' 
+        ><i class="material-icons left">play_arrow</i>Iniciar</a>
+
+    </td>
+
+    </tr>
+    {% endfor %}
+</table> 
+    
+{%endblock%}

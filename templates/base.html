@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <title>{%block title%} {%endblock%}</title>
+</head>
+<body>
+   
+        <nav>
+            <ul>
+                <li><a href="{%url 'preguntas'%}" >Simulador</a></li>
+                <li><a href="{%url 'evaluaciones'%}">Evaluaciones</a></li>
+                <li><a href="/simulador/1">Examen</a></li>
+            </ul>
+         </nav>
+ 
+        <h2 class="header caption center">{% block titulo %}
+            {% endblock %}</h2>
+            
+        <main class="container">
+            {%block content%}
+            {%endblock%}
+        </main>
+        {%block scripts%}
+    {%endblock%}
+</body>
+</html>
