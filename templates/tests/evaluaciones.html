@@ -1,32 +1,73 @@
 {%extends 'base.html'%}
+{%load static%}
 {% block title %}
 Cuestionario 
 {% endblock %}
+
+
+
+{%block styles%}
+  <style type="text/css">
+    .opt {
+        padding:2px;
+
+        width: 100%;
+    }
+    .opt:hover{
+        background-color: orange;
+        color: white;
+        padding:2px;
+        border-radius:5px;
+        width:100%;
+
+    }
+    .hora{
+        position:fixed;
+        top:1%;
+        left:85%;
+        right:2%;
+        padding:8px;
+        border-radius:5px;
+        font-size:18px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+   
+  </style>
+{%endblock%}
 
 {% block titulo %}
 Cuestionario {{evaluaciones.nombre}}
 {% endblock %}
 
 {%block content%}
-    <b>{{evaluaciones.nombre}}</b>
+<b>{{evaluaciones.nombre}}</b>
+    <a class="hora waves-effect waves-light btn right">
+        <b id="hora">{{evaluaciones.tiempo|date:"H:i:s"}}</b>
+    <i class="material-icons right">access_time</i></a>
     <p><b>N° Preguntas:</b> {{evaluaciones.preguntas}}</p>
     <p><b>Nota mínima:</b> {{evaluaciones.score}}</p>
     <p><b>Dificultad:</b>{{evaluaciones.nivel}}</p>
-    <p><b>Tiempo:</b> {{evaluaciones.tiempo}}</p>
+    <p><b>Tiempo:</b> {{evaluaciones.tiempo|date:"H:i"}}</p>
+    
+    {{intento}}
+
     <hr>
     
 
     {%for pregunta in preguntas%}
-                <section class="card pregunta grey lighten-3" style="padding:15px ;">
+                <section class="card pregunta deep-purple lighten-5" style="padding:15px ;">
                     <span class="card-title active">{{forloop.counter}}. Pregunta:</span>
                     <p class="caption"> {{pregunta.enunciado|safe}}</p>
                     <div class="card-action white" style="border-radius:10px;">
                       <p>Respuesta:</p>
                         <form action="#">
+                            {% csrf_token %}
                             {%for r in pregunta.get_respuesta%}
-                            <p>
-                              <label>
-                                <input name="group1" type="radio" checked />
+                            <p class="opt">
+                              <label >
+                                <input name="group1" type="radio" checked onclick="prueba('{{evaluaciones.pk}}','{{pregunta.pk}}','{{r.pk}}')"/>
                                 <span><b style="color:rgb(75, 73, 73)">{{r.respuesta}}</b></span>
                               </label>
                             </p>                            
@@ -39,3 +80,7 @@ Cuestionario {{evaluaciones.nombre}}
                 {%endfor%}
 
 {% endblock %}
+{%block scripts%}
+<script src="{%static 'js/preguntas.js'%}" defer>
+</script>
+{%endblock%}

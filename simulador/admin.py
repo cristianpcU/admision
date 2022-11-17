@@ -1,13 +1,21 @@
 from django.contrib import admin
-from . import models
+from .models import *
 # Register your models here.
-"""
+
 class RespuestaEnLinea(admin.TabularInline):
-    model= models.Respuesta
+    model= Respuesta
+
+class Respuestas(admin.TabularInline):
+    model= Respuesta   
+class RespuestasAdmin(admin.ModelAdmin):
+    #list_display= ('nombre','tipo','tiempo')
+    inlines= [Respuestas]
+    #enLinea=[RespuestaEnLinea]
+admin.site.register(Cuestionario)    
+admin.site.register(Pregunta,RespuestasAdmin)
+#class camposEvaluacion(admin.ModelAdmin):
+ #   list_display: ('nombre','tipo','tiempo')
     
-class PreguntaAdmin(admin.ModelAdmin):
-    enLinea=[RespuestaEnLinea]
-"""
 #admin.site.register(models.Prueba,models.Categoria)
-admin.site.register([models.Evaluacion,models.Pregunta])
+#admin.site.register([models.Evaluacion,models.Pregunta])
 #admin.site.register(models.Respuesta,models.Evaluacion)
