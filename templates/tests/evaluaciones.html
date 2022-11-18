@@ -24,7 +24,7 @@ Cuestionario
     .hora{
         position:fixed;
         top:1%;
-        left:85%;
+        left:80%;
         right:2%;
         padding:8px;
         border-radius:5px;
@@ -67,7 +67,7 @@ Cuestionario {{evaluaciones.nombre}}
                             {%for r in pregunta.get_respuesta%}
                             <p class="opt">
                               <label >
-                                <input name="group1" type="radio" checked onclick="prueba('{{evaluaciones.pk}}','{{pregunta.pk}}','{{r.pk}}')"/>
+                                <input name="group1" type="radio"  onclick="prueba('{{evaluaciones.pk}}','{{pregunta.pk}}','{{r.pk}}')"/>
                                 <span><b style="color:rgb(75, 73, 73)">{{r.respuesta}}</b></span>
                               </label>
                             </p>                            

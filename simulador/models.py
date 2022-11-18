@@ -18,7 +18,7 @@ class Periodo(models.Model):
     def __str__(self) -> str:
         return self.nombre
 class Cuestionario(models.Model):
-    periodo=models.ForeignKey(Periodo, verbose_name='Periodo' , on_delete=models.CASCADE)
+    #periodo=models.ForeignKey(Periodo, verbose_name='Periodo' , on_delete=models.CASCADE)
     nombre = models.CharField(max_length=120)
     tipo = models.CharField(max_length=120)
     preguntas = models.IntegerField()
@@ -46,7 +46,7 @@ class Pregunta(models.Model):
     enunciado= models.TextField(default='')
     justificacion=models.TextField(default='')
     cuestionario= models.ForeignKey(Cuestionario,on_delete=models.CASCADE)
-    categoria=models.ForeignKey(Categoria,on_delete= models.CASCADE)
+    categoria=models.ForeignKey(Categoria,blank=True,on_delete= models.CASCADE)
     creacion=models.DateField(auto_now_add=True)
     
     def __str__(self) -> str:
