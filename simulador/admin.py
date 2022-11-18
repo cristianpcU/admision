@@ -13,9 +13,3 @@ class RespuestasAdmin(admin.ModelAdmin):
     #enLinea=[RespuestaEnLinea]
 admin.site.register([Periodo,Cuestionario,Categoria,Intento, DetalleIntento,Resultados])    
 admin.site.register(Pregunta,RespuestasAdmin)
-#class camposEvaluacion(admin.ModelAdmin):
- #   list_display: ('nombre','tipo','tiempo')
-    
-#admin.site.register(models.Prueba,models.Categoria)
-#admin.site.register([models.Evaluacion,models.Pregunta])
-#admin.site.register(models.Respuesta,models.Evaluacion)
