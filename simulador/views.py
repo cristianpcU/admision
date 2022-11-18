@@ -18,8 +18,6 @@ def index(request):
     
 
 def examenes(request,id):
-    print(request.method)
-    
     if request.method == 'POST':
         print("POST:",request.POST)
         cuestionario=request.POST['cuestionario']
@@ -28,7 +26,9 @@ def examenes(request,id):
         punto= models.Respuesta.objects.get(pk=respuesta)
         punto=1 if punto.correcta else 0
         print("puntuacion=",punto) 
-        intento=1
+        from django.db.models import Sum 
+       
+        intento=request.POST['intento']
         if not models.DetalleIntento.objects.filter(intento_id=intento,pregunta_id=pregunta).exists():
             det = models.DetalleIntento(intento_id=intento,pregunta_id=pregunta,respuesta_id=respuesta,puntuacion=punto)
             det.save()
@@ -38,9 +38,8 @@ def examenes(request,id):
             det.respuesta_id=respuesta
             det.puntuacion=punto
             det.save()
-            print("existe")
             #
-        
+        print(models.DetalleIntento.objects.filter(intento_id=intento).aggregate(total=Sum('puntuacion')))
         return HttpResponse(json.dumps({"result":True}),content_type='application/json')
     else:
         data={}

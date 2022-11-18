@@ -37,7 +37,6 @@ function hora() {
     if(h===0 && m===0 && s===0){
         clearInterval(t);
     }
-    
     b_hora.innerText=fhora(h)+":"+fhora(m)+":"+fhora(s);
     s--;
     
@@ -48,23 +47,23 @@ function timer(){
 
 timer();
 
-function prueba(c,p,r){
-     alert(c+" " + p + " " + r + " crf:"+ csrftoken);
+function prueba(c,p,r,i){
+    console.log(c,p,r,i); 
     $.ajax({
         type: "POST",
         url: url,
-        data:{'csrfmiddlewaretoken':csrftoken,'cuestionario':c,'pregunta':p,'respuesta':r},
+        data:{'csrfmiddlewaretoken':csrftoken,'cuestionario':c,'pregunta':p,'respuesta':r,'intento':i},
         error: function(e){
             console.log("error:",e);
         },
         success: function(e){
             console.log("success:",e);}
     });
-    
-
-   /* console.log(datos);
-    axios.post(url,{dato:'prueba'})
-    .then(response=>console.log(response.data))
-    .catch(error=>console.log(error))*/
-    //console.log(url);
+}
+function terminar(){
+    con=confirm("seguro que desea termina");
+    if(con){
+        clearInterval(t);
+        window.location.href="/simulador/";
+   }
 }

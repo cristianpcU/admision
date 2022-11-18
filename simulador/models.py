@@ -72,6 +72,8 @@ class Intento(models.Model):
     user=models.ForeignKey(User, on_delete= models.CASCADE)
     score=models.FloatField(default=0)
     fecha=models.DateTimeField(auto_now_add=True)
+    def __str__(self) -> str:
+        return f"{self.user} | {self.cuestionario} | {self.fecha} | {self.score}"
     
 class DetalleIntento(models.Model):
     intento=models.ForeignKey(Intento, on_delete= models.CASCADE)

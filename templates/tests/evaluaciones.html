@@ -51,11 +51,11 @@ Cuestionario {{evaluaciones.nombre}}
     <p><b>Dificultad:</b>{{evaluaciones.nivel}}</p>
     <p><b>Tiempo:</b> {{evaluaciones.tiempo|date:"H:i"}}</p>
     
-    {{intento}}
+    
 
     <hr>
     
-
+    {{intento.id}}
     {%for pregunta in preguntas%}
                 <section class="card pregunta deep-purple lighten-5" style="padding:15px ;">
                     <span class="card-title active">{{forloop.counter}}. Pregunta:</span>
@@ -67,7 +67,7 @@ Cuestionario {{evaluaciones.nombre}}
                             {%for r in pregunta.get_respuesta%}
                             <p class="opt">
                               <label >
-                                <input name="group1" type="radio"  onclick="prueba('{{evaluaciones.pk}}','{{pregunta.pk}}','{{r.pk}}')"/>
+                                <input name="group1" type="radio"  onclick="prueba('{{evaluaciones.pk}}','{{pregunta.pk}}','{{r.pk}}','{{intento.id}}')"/>
                                 <span><b style="color:rgb(75, 73, 73)">{{r.respuesta}}</b></span>
                               </label>
                             </p>                            
@@ -78,6 +78,9 @@ Cuestionario {{evaluaciones.nombre}}
                 </section>
                
                 {%endfor%}
+             <section>
+              <button onclick="terminar()" class="btn right" style="border-radius:8px;margin-bottom: 5%;">Terminar</button>
+             </section>
 
 {% endblock %}
 {%block scripts%}

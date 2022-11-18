@@ -11,7 +11,7 @@ class RespuestasAdmin(admin.ModelAdmin):
     #list_display= ('nombre','tipo','tiempo')
     inlines= [Respuestas]
     #enLinea=[RespuestaEnLinea]
-admin.site.register(Cuestionario)    
+admin.site.register([Periodo,Cuestionario,Categoria,Intento, DetalleIntento,Resultados])    
 admin.site.register(Pregunta,RespuestasAdmin)
 #class camposEvaluacion(admin.ModelAdmin):
  #   list_display: ('nombre','tipo','tiempo')
